@@ -4,6 +4,7 @@ package edu.ucalgary.oop;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,26 +15,24 @@ public class DisasterVictim{
 	private	String lastName;
 	private String dateOfBirth;
 	private	String comments;
-	private static int ASSIGNED_SOCIAL_ID;
+	private int ASSIGNED_SOCIAL_ID;
 	private	MedicalRecord[] medicalRecords;
 	private FamilyRelation[] familyConnections;
 	private String ENTRY_DATE;
 	private Supply[] personalBelongings;
 	private String gender;
-	private int counter;
+	private static int counter;
 	
 	//Constructor
-	public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalAccessException {
+	public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalArgumentException {
 
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-		try{
-			LocalDate.parse(ENTRY_DATE, dateFormat);
-			this.firstName = firstName;
-			this.ENTRY_DATE = ENTRY_DATE;
-		} catch (Exception e) {
+		//DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String regex = "\\d{4}-\\d{2}-\\d{2}";
+		if (!ENTRY_DATE.matches(regex)){
 			throw new IllegalArgumentException("Date format is in Invalid. Expected: YYYY-MM-DD");
 		}
+		this.firstName = firstName;
+		this.ENTRY_DATE = ENTRY_DATE;
 		
 	}
 
@@ -89,14 +88,13 @@ public class DisasterVictim{
 	}
 	
 	public void setDateOfBirth(String dateOfBirth){
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		//DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String regex = "\\d{4}-\\d{2}-\\d{2}";
 
-		try{
-			LocalDate.parse(dateOfBirth, dateFormat);
-			this.dateOfBirth = dateOfBirth;
-		}catch (Exception e) {
+		if(!dateOfBirth.matches(regex)){
 			throw new IllegalArgumentException("Date format is in Invalid. Expected: YYYY-MM-DD");
 		}
+		this.dateOfBirth = dateOfBirth;
 	}
 	
 	public void setComments(String comments){
