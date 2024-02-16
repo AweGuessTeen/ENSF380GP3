@@ -2,13 +2,13 @@ package edu.ucalgary.oop;
 
 import java.util.ArrayList;
 
-public class location {
+public class Location {
     private String name;
     private String address;
     private ArrayList<DisasterVictim> occupants;
     private ArrayList<Supply> supplies;
 
-    public location(String name, String address) {
+    public Location(String name, String address) {
         this.name = name;
         this.address = address;
         this.occupants = new ArrayList<>();
