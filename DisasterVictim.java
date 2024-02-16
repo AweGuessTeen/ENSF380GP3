@@ -1,4 +1,12 @@
-// DisasterVictim Class 
+// DisasterVictim Class
+
+package edu.ucalgary.oop;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisasterVictim{
 	
@@ -15,17 +23,26 @@ public class DisasterVictim{
 	private int counter;
 	
 	//Constructor
-	public DisasterVictim(String firstName, String ENTRY_DATE){
-		this.firstName = firstName;
-		this.ENTRY_DATE = ENTRY_DATE;
+	public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalAccessException {
+
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		try{
+			LocalDate.parse(ENTRY_DATE, dateFormat);
+			this.firstName = firstName;
+			this.ENTRY_DATE = ENTRY_DATE;
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Date format is in Invalid. Expected: YYYY-MM-DD");
+		}
+		
 	}
-	
+
 	//getters
-	public String getfirstName(){
+	public String getFirstName(){
 		return firstName;
 	}
 	
-	public String getlastName(){
+	public String getLastName(){
 		return lastName;
 	}
 	
@@ -46,7 +63,7 @@ public class DisasterVictim{
 	}
 	
 	public int getAssignedSocialID(){
-		return ASSIGNED_SOCIAL_ID;
+		return ASSIGNED_SOCIAL_ID++;
 	}
 	
 	public Supply[] getPersonalBelongings(){
@@ -72,14 +89,21 @@ public class DisasterVictim{
 	}
 	
 	public void setDateOfBirth(String dateOfBirth){
-		this.dateOfBirth = dateOfBirth;
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		try{
+			LocalDate.parse(dateOfBirth, dateFormat);
+			this.dateOfBirth = dateOfBirth;
+		}catch (Exception e) {
+			throw new IllegalArgumentException("Date format is in Invalid. Expected: YYYY-MM-DD");
+		}
 	}
 	
 	public void setComments(String comments){
 		this.comments = comments;
 	}
 	
-	public void setMedicalRecords(setMedicalRecord[] medicalRecords){
+	public void setMedicalRecords(MedicalRecord[] medicalRecords){
 		this.medicalRecords = medicalRecords;
 	}
 	
@@ -118,13 +142,13 @@ public class DisasterVictim{
 }
 	
 	public void addFamilyConnection(FamilyRelation familyrelation){
-		if (familyConnections = null){
+		if (familyConnections == null){
 			familyConnections = new FamilyRelation[1];
 			familyConnections[0] = familyrelation;
 		}
 		else{
 			FamilyRelation[] newFamilyConnections = Arrays.copyOf(familyConnections, familyConnections.length + 1);
-            newFamilyConnections[familyConnections.length] = familyRelation;
+            newFamilyConnections[familyConnections.length] = familyrelation;
             familyConnections = newFamilyConnections;
 		}
 	}
@@ -132,7 +156,7 @@ public class DisasterVictim{
 	public void removeFamilyConnection(FamilyRelation familyrelation){
 		if (familyConnections != null && familyConnections.length > 0) {
             List<FamilyRelation> relationList = new ArrayList<>(Arrays.asList(familyConnections));
-            relationList.remove(familyRelation);
+            relationList.remove(familyrelation);
             familyConnections = relationList.toArray(new FamilyRelation[0]);
         }
 	}
