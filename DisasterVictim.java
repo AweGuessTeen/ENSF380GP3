@@ -2,9 +2,6 @@
 
 package edu.ucalgary.oop;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +12,10 @@ public class DisasterVictim{
 	private	String lastName;
 	private String dateOfBirth;
 	private	String comments;
-	private int ASSIGNED_SOCIAL_ID;
+	private final int ASSIGNED_SOCIAL_ID;
 	private	MedicalRecord[] medicalRecords;
 	private FamilyRelation[] familyConnections;
-	private String ENTRY_DATE;
+	private final String ENTRY_DATE;
 	private Supply[] personalBelongings;
 	private String gender;
 	private static int counter;
@@ -33,6 +30,7 @@ public class DisasterVictim{
 		}
 		this.firstName = firstName;
 		this.ENTRY_DATE = ENTRY_DATE;
+		this.ASSIGNED_SOCIAL_ID = counter++;
 		
 	}
 
@@ -62,12 +60,8 @@ public class DisasterVictim{
 	}
 	
 	public int getAssignedSocialID(){
-		if (counter == 0){
-			counter++;
-		}
-		counter++;
-
-		return counter;
+		return ASSIGNED_SOCIAL_ID;
+		
 	}
 	
 	public Supply[] getPersonalBelongings(){
