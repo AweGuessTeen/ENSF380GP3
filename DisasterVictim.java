@@ -36,22 +36,6 @@ public class DisasterVictim{
 		
 	}
 
-/*public MedicalRecord(Location location, String treatmentDetails, String dateOfTreatment) throws IllegalArgumentException{
-        String regex = "\\d{4}-\\d{2}-\\d{2}";
-        if (!dateOfTreatment.matches(regex)) {
-            throw new IllegalArgumentException("Invalid date format. Expected format is YYYY-MM-DD.");
-        }
-        this.location = location;
-        this.treatmentDetails = new String(treatmentDetails);
-        this.dateOfTreatment = new String(dateOfTreatment);
-    } */
-
-
-
-
-
-
-
 	//getters
 	public String getFirstName(){
 		return firstName;
@@ -78,7 +62,12 @@ public class DisasterVictim{
 	}
 	
 	public int getAssignedSocialID(){
-		return ASSIGNED_SOCIAL_ID++;
+		if (counter == 0){
+			counter++;
+		}
+		counter++;
+
+		return counter;
 	}
 	
 	public Supply[] getPersonalBelongings(){
@@ -104,7 +93,6 @@ public class DisasterVictim{
 	}
 	
 	public void setDateOfBirth(String dateOfBirth){
-		//DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String regex = "\\d{4}-\\d{2}-\\d{2}";
 
 		if(!dateOfBirth.matches(regex)){
@@ -112,20 +100,6 @@ public class DisasterVictim{
 		}
 		this.dateOfBirth = dateOfBirth;
 	}
-
-/*public DisasterVictim(String firstName, String ENTRY_DATE) throws IllegalArgumentException {
-
-		//DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String regex = "\\d{4}-\\{2}-\\d{2}";
-		if (!ENTRY_DATE.matches(regex)){
-			throw new IllegalArgumentException("Date format is in Invalid. Expected: YYYY-MM-DD");
-		}
-		this.firstName = firstName;
-		this.ENTRY_DATE = ENTRY_DATE;
-		
-	} */
-
-
 	
 	public void setComments(String comments){
 		this.comments = comments;
